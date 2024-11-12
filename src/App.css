@@ -17,7 +17,7 @@ html {
 body {
   color: #333;
   background: #fdf9f4;
-  font: 16px/1.6 "Muli", sans-serif;
+  font: 16px/1.6 "Yeseva One", sans-serif;
   min-width: 320px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -36,7 +36,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Muli", sans-serif;
+  font-family: "Yeseva One", sans-serif;
   font-weight: 400;
   margin: 0 0 20px;
   color: inherit;
@@ -396,7 +396,7 @@ textarea {
 
 #header .navbar-brand {
   color: #14453d;
-  text-transform: uppercase;
+  text-transform: lowercase;
   font-weight: 600;
   height: auto;
   padding: 0;
@@ -584,7 +584,7 @@ textarea {
 
 .works-block .portfoliolist>div h3 {
   margin: 0 0 5px;
-  color: #14453d;
+  color: #d3e1df;
   font-size: 16px;
 }
 

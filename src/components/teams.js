@@ -8,55 +8,44 @@ const teamsData = [
     id: 1,
     image: require('../assets/images/team1.jpg'),
     fbLink: 'https://www.facebook.com',
-    twitterLink: 'https://www.twitter.com',
-    linkedinLink: 'https://www.linkedin.com',
+    linkedinLink: 'https://www.linkedin.com/in/lee-eerika/',
     name: 'Erika Lee',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui facilis, totam maiores.'
+    description: 'Class of 2026'
   },
   {
     id: 2,
     image: require('../assets/images/team2.jpg'),
-    fbLink: 'https://www.facebook.com',
-    twitterLink: 'https://www.twitter.com',
     linkedinLink: 'https://www.linkedin.com',
     name: 'Kory Arfania',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui facilis, totam maiores.'
+    description: 'Class of 2025'
   },
   {
     id: 3,
     image: require('../assets/images/team3.jpg'),
-    fbLink: 'https://www.facebook.com',
-    twitterLink: 'https://www.twitter.com',
-    linkedinLink: 'https://www.linkedin.com',
+    linkedinLink: 'https://www.linkedin.com/in/jaedonw/',
     name: 'Jaedon Wong',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui facilis, totam maiores.'
+    description: 'Class of 2025'
   },
   {
     id: 4,
     image: require('../assets/images/team4.jpg'),
-    fbLink: 'https://www.facebook.com',
-    twitterLink: 'https://www.twitter.com',
-    linkedinLink: 'https://www.linkedin.com',
+    linkedinLink: 'https://www.linkedin.com/in/sumeet-kapoorsk/',
     name: 'Sumeet Kapoor',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui facilis, totam maiores.'
+    description: 'Class of 2026'
   },
   {
     id: 5,
     image: '/src/assets/images/stephanie.jpeg',
-    fbLink: 'https://www.facebook.com',
-    twitterLink: 'https://www.twitter.com',
-    linkedinLink: 'https://www.linkedin.com',
+    linkedinLink: 'https://www.linkedin.com/in/s-a-yu/',
     name: 'Stephanie Yu',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui facilis, totam maiores.'
+    description: 'Class of 2025'
   },
   {
     id: 6,
     image: require('../assets/images/taylor.jpg'),
-    fbLink: 'https://www.facebook.com',
-    twitterLink: 'https://www.twitter.com',
-    linkedinLink: 'https://www.linkedin.com',
+    linkedinLink: 'https://www.linkedin.com/in/taylor-hill-miles/',
     name: 'Taylor Hill-Miles',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui facilis, totam maiores.'
+    description: 'Class of 2025'
   }
 ]
 
@@ -83,8 +72,6 @@ function AppTeams() {
                     <div className='overlay'>
                       <div className='socials'>
                         <ul>
-                          <li><a href={teams.fbLink}><i className="fab fa-facebook-f"></i></a></li>
-                          <li><a href={teams.twitterLink}><i className="fab fa-twitter"></i></a></li>
                           <li><a href={teams.linkedinLink}><i className="fab fa-linkedin-in"></i></a></li>
                         </ul>
                       </div>

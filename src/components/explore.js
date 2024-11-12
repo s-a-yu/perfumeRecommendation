@@ -7,66 +7,66 @@ import Pagination from 'react-bootstrap/Pagination';
 const worksData = [
   {
     id: 1,
-    link: 'https://www.google.com',
+    link: 'https://www.byredo.com/us_en/gypsy-water-eau-de-parfum-50ml',
     image: '/src/assets/images/perfume1.jpg',
     title: 'Gypsy Water',
     subtitle: 'Byredo'
   },
   {
     id: 2,
-    link: 'https://www.google.com',
+    link: 'https://www.valentino-beauty.us/fragrances/fragrances-men/born-in-roma-uomo-intense/born-in-roma-uomo-eau-de-parfum-intense-MPL01907.html',
     image: '/src/assets/images/perfume2.jpg',
-    title: 'Fragrance Name',
-    subtitle: 'Brand'
+    title: 'Born in Roma Intense',
+    subtitle: 'Valentino'
   },
   {
     id: 3,
     link: 'https://www.google.com',
     image: '/src/assets/images/perfume3.jpg',
-    title: 'Fragrance Name',
-    subtitle: 'Brand'
+    title: 'Forte pour Femme',
+    subtitle: 'Unknown'
   },
   {
     id: 4,
-    link: 'https://www.google.com',
+    link: 'https://phlur.com/products/vanilla-skin-body-mist?srsltid=AfmBOooyXJQsuAzehexkqvZXcIUWv-wAHbiHRiI-pJyqzqjg-qpuOAmI',
     image: '/src/assets/images/perfume4.jpg',
-    title: 'Fragrance Name',
-    subtitle: 'Brand'
+    title: 'Vanilla Skin',
+    subtitle: 'Phlur'
   },
   {
     id: 5,
-    link: 'https://www.google.com',
+    link: 'https://www.chanel.com/us/fragrance/p/107360/bleu-de-chanel-eau-de-parfum-spray/',
     image: '/src/assets/images/perfume5.jpg',
-    title: 'Fragrance Name',
-    subtitle: 'Brand'
+    title: 'Bleu',
+    subtitle: 'Chanel'
   },
   {
     id: 6,
-    link: 'https://www.google.com',
+    link: 'https://www.giorgioarmanibeauty-usa.com/fragrances/womens-perfume/acqua-di-gioia/acqua-di-gioia-eau-de-parfum/A378.html?srsltid=AfmBOorgqU0CJKF4yosT4jjIh_JivOqS-NU2tO4GQ3Zg9RBF1MWascd_',
     image: '/src/assets/images/perfume6.jpg',
-    title: 'Fragrance Name',
-    subtitle: 'Brand'
+    title: 'Acqua Di Gioia',
+    subtitle: 'Giorgio Armani'
   },
   {
     id: 7,
-    link: 'https://www.google.com',
+    link: 'https://www.valentino-beauty.us/fragrances/fragrances-women/fragrances-women-born-in-roma/donna-born-in-roma-eau-de-parfum-MPL00468.html',
     image: '/src/assets/images/perfume7.jpg',
-    title: 'Fragrance Name',
-    subtitle: 'Brand'
+    title: 'Born in Roma Donna',
+    subtitle: 'Valentino'
   },
   {
     id: 8,
-    link: 'https://www.google.com',
+    link: 'https://us.parfums-de-marly.com/products/delina',
     image: '/src/assets/images/perfume8.jpg',
-    title: 'Fragrance Name',
-    subtitle: 'Brand'
+    title: 'Delina',
+    subtitle: 'Parfums de Marly Paris'
   },
   {
     id: 9,
-    link: 'https://www.google.com',
+    link: 'https://www.chanel.com/us/fragrance/p/126550/chance-eau-vive-eau-de-toilette-spray/',
     image: '/src/assets/images/perfume9.jpg',
-    title: 'Fragrance Name',
-    subtitle: 'Brand'
+    title: 'Chance',
+    subtitle: 'Chanel'
   }
 ]
 
