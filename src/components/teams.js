@@ -42,7 +42,7 @@ const teamsData = [
   },
   {
     id: 5,
-    image: require('../assets/images/team5.jpg'),
+    image: '/src/assets/images/stephanie.jpeg',
     fbLink: 'https://www.facebook.com',
     twitterLink: 'https://www.twitter.com',
     linkedinLink: 'https://www.linkedin.com',
@@ -74,7 +74,12 @@ function AppTeams() {
               return (
                 <Col sm={3} key={teams.id}>
                   <div className='image'>
-                    <Image src={teams.image} />
+                    <div style={{ width: '200px', height: '250px', overflow: 'hidden' }}>
+                      <Image
+                        src={teams.image}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                    </div>
                     <div className='overlay'>
                       <div className='socials'>
                         <ul>
