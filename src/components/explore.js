@@ -8,63 +8,63 @@ const worksData = [
   {
     id: 1,
     link: 'https://www.google.com',
-    image: require('../assets/images/img2.jpg'),
-    title: 'Fragrance Name',
-    subtitle: 'Brand'
+    image: '/src/assets/images/perfume1.jpg',
+    title: 'Gypsy Water',
+    subtitle: 'Byredo'
   },
   {
     id: 2,
     link: 'https://www.google.com',
-    image: require('../assets/images/img3.jpg'),
+    image: '/src/assets/images/perfume2.jpg',
     title: 'Fragrance Name',
     subtitle: 'Brand'
   },
   {
     id: 3,
     link: 'https://www.google.com',
-    image: require('../assets/images/img4.jpg'),
+    image: '/src/assets/images/perfume3.jpg',
     title: 'Fragrance Name',
     subtitle: 'Brand'
   },
   {
     id: 4,
     link: 'https://www.google.com',
-    image: require('../assets/images/img5.jpg'),
+    image: '/src/assets/images/perfume4.jpg',
     title: 'Fragrance Name',
     subtitle: 'Brand'
   },
   {
     id: 5,
     link: 'https://www.google.com',
-    image: require('../assets/images/img6.jpg'),
+    image: '/src/assets/images/perfume5.jpg',
     title: 'Fragrance Name',
     subtitle: 'Brand'
   },
   {
     id: 6,
     link: 'https://www.google.com',
-    image: require('../assets/images/img7.jpg'),
+    image: '/src/assets/images/perfume6.jpg',
     title: 'Fragrance Name',
     subtitle: 'Brand'
   },
   {
     id: 7,
     link: 'https://www.google.com',
-    image: require('../assets/images/img8.jpg'),
+    image: '/src/assets/images/perfume7.jpg',
     title: 'Fragrance Name',
     subtitle: 'Brand'
   },
   {
     id: 8,
     link: 'https://www.google.com',
-    image: require('../assets/images/img9.jpg'),
+    image: '/src/assets/images/perfume8.jpg',
     title: 'Fragrance Name',
     subtitle: 'Brand'
   },
   {
     id: 9,
     link: 'https://www.google.com',
-    image: require('../assets/images/img2.jpg'),
+    image: '/src/assets/images/perfume9.jpg',
     title: 'Fragrance Name',
     subtitle: 'Brand'
   }
@@ -95,7 +95,13 @@ function AppWorks() {
                 <Col sm={4} key={works.id}>
                   <div className='portfolio-wrapper'>
                     <a href={works.link}>
-                      <Image src={works.image} />
+                    <div style={{ width: '400px', height: '150px', overflow: 'hidden' }}>
+                      <Image
+                        src={works.image}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        alt={works.title}
+                      />
+                    </div>
                       <div className='label text-center'>
                         <h3>{works.title}</h3>
                         <p>{works.subtitle}</p>
