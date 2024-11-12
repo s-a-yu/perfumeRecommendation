@@ -14,8 +14,8 @@ const teamsData = [
   },
   {
     id: 2,
-    image: require('../assets/images/team2.jpg'),
-    linkedinLink: 'https://www.linkedin.com',
+    image: require('../assets/images/kory.jpg'),
+    linkedinLink: 'https://www.linkedin.com/in/karfania/',
     name: 'Kory Arfania',
     description: 'Class of 2025'
   },
