@@ -9,6 +9,7 @@ import AppWorks from './components/explore';
 import AppTeams from './components/teams';
 import AppTestimonials from './components/testimonials';
 import AppFooter from './components/footer';
+import ScentQuiz from './components/ScentQuiz';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <AppAbout />
         <AppServices />
         <AppWorks />
+        <ScentQuiz />
         <AppTeams />
         <AppTestimonials />
       </main>
