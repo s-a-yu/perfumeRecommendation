@@ -14,6 +14,7 @@ function AppHeader() {
             <Nav.Link href="#about">About</Nav.Link>
             <Nav.Link href="#services">Services</Nav.Link>
             <Nav.Link href="#explore">Explore</Nav.Link>
+            <Nav.Link href="#scent-quiz">Quiz</Nav.Link>
             <Nav.Link href="#teams">Team</Nav.Link>
             <Nav.Link href="#testimonials">Testimonials</Nav.Link>
           </Nav>

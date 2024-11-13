@@ -6,7 +6,7 @@ import Image from 'react-bootstrap/Image';
 const teamsData = [
   {
     id: 1,
-    image: require('../assets/images/team1.jpg'),
+    image: require('../assets/images/erikaLee.png'),
     fbLink: 'https://www.facebook.com',
     linkedinLink: 'https://www.linkedin.com/in/lee-eerika/',
     name: 'Erika Lee',
@@ -21,14 +21,14 @@ const teamsData = [
   },
   {
     id: 3,
-    image: require('../assets/images/team3.jpg'),
+    image: require('../assets/images/jaedonProfile.png'),
     linkedinLink: 'https://www.linkedin.com/in/jaedonw/',
     name: 'Jaedon Wong',
     description: 'Class of 2025'
   },
   {
     id: 4,
-    image: require('../assets/images/team4.jpg'),
+    image: require('../assets/images/sumeet.png'),
     linkedinLink: 'https://www.linkedin.com/in/sumeet-kapoorsk/',
     name: 'Sumeet Kapoor',
     description: 'Class of 2026'
