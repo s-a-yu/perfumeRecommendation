@@ -11,6 +11,7 @@ const Login = () => {
   const handleSubmitEvent = (e) => {
     e.preventDefault();
     if (input.username !== "" && input.password !== "") {
+      console.log(input);
       auth.loginAction(input);
       return;
     }
@@ -32,7 +33,7 @@ const Login = () => {
         <input
           type="email"
           id="user-email"
-          name="email"
+          name="username"
           placeholder="example@yahoo.com"
           aria-describedby="user-email"
           aria-invalid="false"

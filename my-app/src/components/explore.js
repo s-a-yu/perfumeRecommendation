@@ -80,7 +80,7 @@ for (let number = 1; number <= 5; number++) {
   );
 }
 
-function AppWorks() {
+function AppExplore() {
   return (
     <section id="works" className="block works-block">
       <Container fluid>
@@ -119,4 +119,4 @@ function AppWorks() {
   );
 }
 
-export default AppWorks;
+export default AppExplore;
