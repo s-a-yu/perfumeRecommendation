@@ -8,6 +8,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("site") || "");
   const navigate = useNavigate();
+
   const loginAction = async (data) => {
     try {
       // fixed fetch url to match express backend
@@ -19,18 +20,45 @@ const AuthProvider = ({ children }) => {
         body: JSON.stringify(data),
       });
       const res = await response.json();
-      if (res.data) {
-        setUser(res.data.user);
+      console.log("res", res);
+      if (res.user) {
+        setUser(res.user);
         setToken(res.token);
         localStorage.setItem("site", res.token);
-        navigate("/dashboard");
+        // localStorage.setItem("user", JSON.stringify(res.user));
+        navigate("/");
         return;
       }
       throw new Error(res.message);
     } catch (err) {
+      alert(err.message);
       console.error(err);
     }
   };
+
+  const registerAction = async (data) => {
+    try {
+      const response = await fetch("http://localhost:8080/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const res = await response.json();
+      if (res.data) {
+        setUser(res.data.user);
+        setToken(res.token);
+        localStorage.setItem("site", res.token);
+        navigate("/");
+        return;
+      }
+      throw new Error(res.message);
+    } catch (err) {
+      alert(err.message);
+      console.error(err);
+    }
+  }
 
   const logOut = () => {
     setUser(null);
@@ -40,7 +68,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ token, user, loginAction, logOut }}>
+    <AuthContext.Provider value={{ token, user, loginAction, registerAction, logOut }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,21 +1,27 @@
 import { useState } from "react";
 import { useAuth } from './hooks/AuthProvider';
 
-const Login = () => {
+const Register = () => {
   const [input, setInput] = useState({
     username: "",
     password: "",
+    confirmPassword: "",
   });
 
   const auth = useAuth();
   const handleSubmitEvent = (e) => {
     e.preventDefault();
-    if (input.username !== "" && input.password !== "") {
+    if (input.username !== "" && input.password !== "" && input.confirmPasswordv !== "") {
       console.log(input);
-      auth.loginAction(input);
+      if (input.password !== input.confirmPassword) {
+        alert("passwords do not match");
+        return;
+      }
+      const req = { username: input.username, password: input.password };
+      auth.registerAction(req);
       return;
     }
-    alert("pleae provide a valid input");
+    alert("please provide a valid input");
   };
 
   const handleInput = (e) => {
@@ -57,12 +63,26 @@ const Login = () => {
           your password should be more than 6 character
         </div>
       </div>
+      <div className="form_control">
+        <label htmlFor="confirm-password">Confirm password:</label>
+        <input
+          type="password"
+          id="confirm-password"
+          name="confirmPassword"
+          aria-describedby="user-password"
+          aria-invalid="false"
+          onChange={handleInput}
+        />
+        <div id="confirm-password" className="sr-only">
+          your password should be more than 6 character
+        </div>
+      </div>
       <button className="btn-submit">Submit</button>
       <div>
-        <a href="/register">No account? Register now!</a>
+        <a href="/login">Already have an account? Login here.</a>
       </div>
     </form>
   );
 };
 
-export default Login;
+export default Register;

@@ -10,6 +10,7 @@ import AppTestimonials from "./components/testimonials";
 import AppFooter from "./components/footer";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./components/login";
+import Register from "./components/register";
 import Dashboard from "./components/dashboard";
 import AuthProvider from "./components/hooks/AuthProvider";
 import PrivateRoute from "./components/router/route";
@@ -24,6 +25,7 @@ function App() {
         <AuthProvider>
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard" element={<Dashboard />} />
             </Route>

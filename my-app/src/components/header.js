@@ -2,8 +2,14 @@ import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import { useAuth } from "./hooks/AuthProvider";
 
 function AppHeader() {
+  const auth = useAuth();
+  const { user } = useAuth();
+  console.log("user", user);
+  console.log("auth", auth);
+
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -18,7 +24,15 @@ function AppHeader() {
             <Nav.Link href="#scent-quiz">Quiz</Nav.Link>
             <Nav.Link href="#teams">Team</Nav.Link>
             <Nav.Link href="#testimonials">Testimonials</Nav.Link>
-            <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+            {user ? (
+              <><Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+              <button onClick={() => auth.logOut()} className="btn-submit">
+                Logout
+              </button></>
+
+            ) : (
+              <Nav.Link as={Link} to="/login">Login/Register</Nav.Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
