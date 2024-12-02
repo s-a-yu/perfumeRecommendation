@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useAuth } from './hooks/AuthProvider';
+import '../login.css';
+
 
 const Login = () => {
   const [input, setInput] = useState({
@@ -27,6 +29,8 @@ const Login = () => {
   };
 
   return (
+    <div id="login-form">
+      <h2>Login to your aura.</h2>
     <form onSubmit={handleSubmitEvent}>
       <div className="form_control">
         <label htmlFor="user-email">Email:</label>
@@ -62,6 +66,7 @@ const Login = () => {
         <a href="/register">No account? Register now!</a>
       </div>
     </form>
+    </div>
   );
 };
 
