@@ -18,6 +18,8 @@ import AppExplore from "./components/explore";
 import AppHeader from "./components/header";
 import AppHero from "./components/hero";
 import ScentQuiz from "./components/ScentQuiz"
+import RecSystem from "./components/RecSystem";
+
 function App() {
   return (
     <div className="App">
@@ -41,6 +43,7 @@ function App() {
                     <AppAbout />
                     <AppServices />
                     <ScentQuiz />
+                    <RecSystem/>
                     <AppWorks />
                     <AppTeams />
                     <AppTestimonials />
