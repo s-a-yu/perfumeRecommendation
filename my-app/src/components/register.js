@@ -33,6 +33,8 @@ const Register = () => {
   };
 
   return (
+    <div id="register-form">
+      <h2>Register for aura.</h2>
     <form onSubmit={handleSubmitEvent}>
       <div className="form_control">
         <label htmlFor="user-email">Email:</label>
@@ -82,6 +84,7 @@ const Register = () => {
         <a href="/login">Already have an account? Login here.</a>
       </div>
     </form>
+    </div>
   );
 };
 
