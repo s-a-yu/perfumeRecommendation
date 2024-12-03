@@ -162,7 +162,7 @@ function AppExplore() {
   }
 
   return (
-    <section id="works" className="block works-block">
+    <section id="explore" className="block works-block">
       <Container fluid>
         <div className="title-holder">
           <h2>Explore</h2>
