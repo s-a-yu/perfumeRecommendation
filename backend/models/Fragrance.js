@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const fragranceSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  brand: { type: String },
-  description: { type: String },
-  images: [{ type: String }],
+  Brand: { type: String },
+  Name: { type: String, required: true, unique: true },
+  Notes: { type: String },
+  Images: [{ type: String }],
 });
 
 module.exports = mongoose.model("Fragrance", fragranceSchema);
