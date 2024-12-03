@@ -25,7 +25,7 @@ const AuthProvider = ({ children }) => {
         setUser(res.user);
         setToken(res.token);
         localStorage.setItem("site", res.token);
-        // localStorage.setItem("user", JSON.stringify(res.user));
+        localStorage.setItem("username", res.user.username);
         navigate("/");
         return;
       }
@@ -50,6 +50,7 @@ const AuthProvider = ({ children }) => {
         setUser(res.data.user);
         setToken(res.token);
         localStorage.setItem("site", res.token);
+        localStorage.setItem("username", res.user.username);
         navigate("/");
         return;
       }
