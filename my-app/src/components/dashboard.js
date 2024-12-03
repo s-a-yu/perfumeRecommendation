@@ -1,9 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import Header from "./header";
 import { useAuth } from './hooks/AuthProvider';
 
 const Dashboard = () => {
   const auth = useAuth();
+  const username = auth.user?.username;
+
+  const [favoriteFragrances, setFavoriteFragrances] = useState([]);
+
+  // load the user's saved fragrances & populate dashboard
+const getUsersFavoriteFragrances = async () => {
+  try {
+      const response = await fetch(`http://localhost:8080/api/frag/user/favorites?username=${username}`, {
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+          },
+      });
+      const res = await response.json();
+      console.log("res", res);
+      if (res) {
+          console.log("Retrieved user's favorite fragrances", res.message);
+          setFavoriteFragrances(res);
+          console.log("favorite frags", favoriteFragrances);
+          return;
+      }
+      return res;
+  } catch (err) {
+      console.error(err);
+  }
+};
+
+const removeFragranceFromUser = async (fragName) => {
+  try {
+    console.log("removing fragrance", fragName);
+      const response = await fetch("http://localhost:8080/api/frag/remove/user/fragrance", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, Name: fragName }),
+      });
+      const res = await response.json();
+      console.log("res", res);
+      if (res.message) {
+          console.log("fragrance removed message", res.message);
+          setFavoriteFragrances(favoriteFragrances.filter(frag => frag.Name !== fragName));
+          alert(res.message);
+          return;
+      }
+      throw new Error(res.message);
+  } catch (err) {
+      console.error(err);
+  }
+};
+
+  // Fetch the user's favorite fragrances when the component mounts
+  useEffect(() => {
+    getUsersFavoriteFragrances();
+  }, []);
 
   return (
     <div>
@@ -25,55 +80,26 @@ const Dashboard = () => {
       
       <section id="saved-fragrances" className="saved-fragrances-section">
         <p style={{ textAlign: "center", fontSize: "35px", marginTop: "20px"}}>Saved Fragrances</p>
+        <div className="saved-fragrances">
+        {favoriteFragrances.length > 0 ? (
+          favoriteFragrances.map((fragrance, index) => (
+            <div key={index} className="fragrance-item">
+              <h3>{fragrance.Name}</h3>
+              <p>{fragrance.Brand}</p>
+              <p>{fragrance.Notes}</p>
+              {fragrance.Images && fragrance.Images.length > 0 && (
+                <img src={fragrance.Images[0]} alt={fragrance.Name} />
+              )}
+              <button onClick={() => removeFragranceFromUser(fragrance.Name)}>Remove</button>
+            </div>
+          ))
+        ) : (
+          <p>No saved fragrances found.</p>
+        )}
+        </div>
       </section>
     </div>
   );
 };
 
 export default Dashboard;
-
-/*
-import React from "react";
-import { useAuth } from './hooks/AuthProvider';
-
-const Dashboard = () => {
-  const auth = useAuth();
-
-  console.log("auth ",auth);
-  console.log("user",auth.user);
-
-  // Example static images
-  const images = [
-    require("../assets/images/img1.jpg"),
-    require("../assets/images/img2.jpg"),
-    require("../assets/images/img3.jpg"),
-    require("../assets/images/img4.jpg"),
-    require("../assets/images/img5.jpg"),
-    require("../assets/images/img6.jpg"),
-    require("../assets/images/img7.jpg"),
-    require("../assets/images/img8.jpg"),
-    require("../assets/images/img9.jpg"),
-  ];
-  
-  return (
-    <div className="container">
-      <div>
-        <h1>Welcome! {auth.user?.username}</h1>
-        <button onClick={() => auth.logOut()} className="btn-submit">
-          logout
-        </button>
-      </div>
-      <div className="photo-grid">
-        {images.map((src, index) => (
-          <div className="grid-item" key={index}>
-            <img src={src} alt={`Static ${index + 1}`} />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-export default Dashboard;
-*/
-
