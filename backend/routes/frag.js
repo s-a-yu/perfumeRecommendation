@@ -3,11 +3,65 @@ const User = require('../models/User');
 const express = require('express');
 const router = express.Router();
 
-// GET all fragrances saved to user's profile
-router.get('/', async (req, res) => {
+router.get('/user/favorites', async (req, res) => {
     try {
-        const fragrances = await Fragrance.find();
-        res.json(fragrances);
+        const { username } = req.query;
+        console.log('username', username);
+
+        // Validate the request query
+        if (!username) {
+            return res.status(400).json({ message: "Missing required query parameter: username" });
+        }
+
+        // Find the user by username
+        const user = await User.findOne({ username }).populate('fragrance_favorites');
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Return the user's favorite fragrances
+        res.json(user.fragrance_favorites);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Remove a fragrance from user's profile
+router.post('/remove/user/fragrance', async (req, res) => {
+    try {
+        const { username, Name } = req.body;
+        console.log('username', username);
+        console.log('Name', Name);
+
+        // Find the user by ID
+        const user = await User.findOne({username});
+        if (!user) {
+            console.log('User not found');
+            return res.status(404).json({ message: "User not found" });
+        }
+        console.log('user', user);
+
+        // Find the fragrance by name
+        const fragrance = await Fragrance.findOne({ Name });
+        if (!fragrance) {
+            console.log('Fragrance not found');
+            return res.status(404).json({ message: "Fragrance not found" });
+        }
+        console.log('fragrance', fragrance);
+
+        // Check if the fragrance is in the user's favorites list
+        if (!user.fragrance_favorites.includes(fragrance._id)) {
+            console.log('Fragrance not in favorites list');
+            return res.status(400).json({ message: "Fragrance not in favorites list" });
+        }
+
+        // Remove the fragrance from the user's favorites list
+        user.fragrance_favorites = user.fragrance_favorites.filter(fav => fav.toString() !== fragrance._id.toString());
+        console.log('removed fragrance from favorites', user.fragrance_favorites);
+        await user.save();
+
+        res.json({ message: "Fragrance removed from favorites successfully", user });
+        console.log('Fragrance removed from favorites successfully');
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

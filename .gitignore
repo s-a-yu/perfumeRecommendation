@@ -33,3 +33,6 @@ htmlcov/
 
 # Compiled documentation
 docs/_build/
+
+recSystem/.DS_Store
+.DS_Store
