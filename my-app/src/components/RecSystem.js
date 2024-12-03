@@ -38,28 +38,6 @@ const saveFragranceToUser = async (username, data) => {
     }
 };
 
-const removeFragranceFromUser = async (username, data) => {
-    try {
-        const response = await fetch("http://localhost:8080/api/frag/remove/user/fragrance", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username, ...data }),
-        });
-        const res = await response.json();
-        console.log("res", res);
-        if (res.message) {
-            console.log("fragrance removed message", res.message);
-            alert(res.message);
-            return;
-        }
-        throw new Error(res.message);
-    } catch (err) {
-        console.error(err);
-    }
-};
-
 // Handle click event to save fragrance to user
 const handleSaveFragrance = (fragrance) => {
     console.log("handling save fragrance", fragrance);
