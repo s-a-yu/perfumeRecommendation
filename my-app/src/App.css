@@ -1204,5 +1204,94 @@ textarea {
     border-radius: 8px; /* Optional: Rounded corners */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Shadow effect */
   }
-  
 }
+
+/* Saved Fragrances Section */
+.saved-fragrances-section {
+  padding: 100px 50px;
+  text-align: center;
+}
+
+.saved-fragrances-section h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.saved-fragrances-section h3 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.fragrance-list {
+  list-style: none;
+  padding: 0;
+  font-size: 20px;
+}
+
+.fragrance-list li {
+  margin-bottom: 10px;
+}
+
+/* Hero Section */
+.hero-section {
+  height: 100vh;
+  background: url('./assets/images/profilePhoto.jpg') no-repeat center center/cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #333;
+}
+
+.hero-content h1 {
+  font-size: 48px;
+  font-weight: 400;
+}
+
+.hero-content p {
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 20px;
+}
+
+.scroll-down a {
+  text-decoration: none;
+  font-size: 24px;
+  color: #14453d;
+}
+
+.scroll-down a:hover {
+  color: black;
+}
+
+/* Saved Fragrances Section */
+.saved-fragrances-section {
+  padding: 0px 50px;
+  text-align: center;
+}
+
+.saved-fragrances-section h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.saved-fragrances-section h3 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.fragrance-list {
+  list-style: none;
+  padding: 0;
+  font-size: 20px;
+}
+
+.fragrance-list li {
+  margin-bottom: 10px;
+}
+

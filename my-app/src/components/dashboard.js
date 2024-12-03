@@ -1,4 +1,39 @@
 import React from "react";
+import Header from "./header";
+import { useAuth } from './hooks/AuthProvider';
+
+const Dashboard = () => {
+  const auth = useAuth();
+
+  return (
+    <div>
+      <header id="header">
+        <Header />
+      </header>
+
+      <div className="hero-section">
+        <div className="hero-content">
+          <h1>Welcome</h1>
+          <p style={{ fontSize: "50px" }}>{auth.user?.username}</p>
+        </div>
+        <div className="scroll-down">
+          <a href="#saved-fragrances" style={{ fontFamily: "Verdana", fontSize: "45px", color: "#333" }}>↓</a>
+        </div>
+      </div>
+
+      <p style={{ textAlign: "left", marginLeft: "20px", fontSize: "40px", marginTop: "20px"}}>Your aura.</p>
+      
+      <section id="saved-fragrances" className="saved-fragrances-section">
+        <p style={{ textAlign: "center", fontSize: "35px", marginTop: "20px"}}>Saved Fragrances</p>
+      </section>
+    </div>
+  );
+};
+
+export default Dashboard;
+
+/*
+import React from "react";
 import { useAuth } from './hooks/AuthProvider';
 
 const Dashboard = () => {
@@ -40,4 +75,5 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+*/
 

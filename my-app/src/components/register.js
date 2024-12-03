@@ -83,6 +83,9 @@ const Register = () => {
       <div>
         <a href="/login">Already have an account? Login here.</a>
       </div>
+      <div>
+        <a href="/#home">Back to Home</a>
+      </div>
     </form>
     </div>
   );

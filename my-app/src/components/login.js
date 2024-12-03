@@ -65,6 +65,9 @@ const Login = () => {
       <div>
         <a href="/register">No account? Register now!</a>
       </div>
+      <div>
+        <a href="/#home">Back to Home</a>
+      </div>
     </form>
     </div>
   );
