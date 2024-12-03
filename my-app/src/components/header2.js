@@ -26,7 +26,7 @@ function Header2() {
     <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand onClick={() => handleNavigation("#home")}>
-          Aura
+          Aura.
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
