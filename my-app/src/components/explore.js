@@ -162,7 +162,7 @@ function AppExplore() {
   }
 
   return (
-    <section id="works" className="block works-block">
+    <section id="explore" className="block works-block">
       <Container fluid>
         <div className="title-holder">
           <h2>Explore</h2>
@@ -173,7 +173,7 @@ function AppExplore() {
             <Col sm={4} key={works.id}>
               <div className="portfolio-wrapper">
                 <a href={works.link}>
-                  <div style={{ width: '400px', height: '150px', overflow: 'hidden' }}>
+                  <div style={{ width: '400px', height: '220px', overflow: 'hidden' }}>
                     <Image
                       src={works.image}
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}

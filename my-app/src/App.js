@@ -4,7 +4,6 @@ import './App.css';
 
 import AppAbout from "./components/about";
 import AppServices from "./components/services";
-import AppWorks from "./components/explore";
 import AppTeams from "./components/teams";
 import AppTestimonials from "./components/testimonials";
 import AppFooter from "./components/footer";
@@ -44,7 +43,7 @@ function App() {
                     <AppServices />
                     <ScentQuiz />
                     <RecSystem/>
-                    <AppWorks />
+                    <AppExplore />
                     <AppTeams />
                     <AppTestimonials />
                     

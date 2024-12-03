@@ -61,15 +61,15 @@ function AppTeams() {
           {
             teamsData.map(teams => {
               return (
-                <Col sm={3} key={teams.id}>
+                <Col sm={6} md={4} key={teams.id} className="d-flex flex-column align-items-center">
                   <div className='image'>
-                    <div style={{ width: '200px', height: '250px', overflow: 'hidden' }}>
+                    <div style={{ width: '210px', height: '250px', overflow: 'hidden' }}>
                       <Image
                         src={teams.image}
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                       />
                     </div>
-                    <div className='overlay'>
+                    <div className='overlay' style={{ width: '210px', height: '250px', overflow: 'hidden' }}>
                       <div className='socials'>
                         <ul>
                           <li><a href={teams.linkedinLink}><i className="fab fa-linkedin-in"></i></a></li>
