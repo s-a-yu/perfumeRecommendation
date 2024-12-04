@@ -42,6 +42,7 @@ const saveFragranceToUser = async (username, data) => {
 const handleSaveFragrance = (fragrance) => {
     console.log("handling save fragrance", fragrance);
     const username = localStorage.getItem('username');
+    console.log("username", username);
     if (username) {
       saveFragranceToUser(username, fragrance);
     } else {

@@ -6,43 +6,41 @@ from sklearn.metrics.pairwise import cosine_similarity
 import pickle
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for cross-origin requests
+CORS(app) 
 
-# Load the dataset and preprocess
+# load and pre-process 
 df = pd.read_csv('perfumeData.csv', encoding='ISO-8859-1')
 df.drop_duplicates(inplace=True)
 df.dropna(inplace=True)
 
-# Extract features
+# extract needed features
 features = df['Name'] + ' ' + df['Brand'] + ' ' + df['Notes']
 vectorizer = TfidfVectorizer()
 feature_vectors = vectorizer.fit_transform(features.values.astype('U'))
 similarity_matrix = cosine_similarity(feature_vectors)
 
-# Save similarity_matrix for future use (optional)
+# saving similarity matrix to disk for future use
 pickle.dump(similarity_matrix, open("similarity_matrix.pkl", "wb"))
 
-# Endpoint to fetch similar perfumes
+# endpoint to get recommendations
 @app.route('/recommend', methods=['GET'])
 def recommend():
     try:
-        # Get the notes input from the query parameter
         input_notes = request.args.get('notes', '')
 
         if not input_notes:
             return jsonify({"error": "Missing 'notes' parameter"}), 400
 
-        # Transform the input notes into a feature vector
+        # transform the input notes into a feature vector
         input_vector = vectorizer.transform([input_notes])
 
-        # Compute similarity scores between the input and all perfumes
+        # similarity scores between the input and all perfumes
         similarity_scores = cosine_similarity(input_vector, feature_vectors)
 
-        # Get indices of the top-n most similar perfumes
         n = int(request.args.get('n', 5))  # Default to 5 recommendations
         similar_indices = similarity_scores[0].argsort()[-n:][::-1]
 
-        # Fetch the details of the similar perfumes
+        # get details of similar perfumes
         recommendations = df.iloc[similar_indices].to_dict(orient='records')
 
         return jsonify(recommendations)
@@ -50,6 +48,6 @@ def recommend():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# Run the Flask app
+# run python app
 if __name__ == '__main__':
     app.run(debug=True)
