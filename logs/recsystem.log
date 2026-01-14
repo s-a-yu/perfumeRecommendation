@@ -1,0 +1,20 @@
+ * Serving Flask app 'app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 943-071-422
+127.0.0.1 - - [12/Jan/2026 11:45:28] "GET /recommend?notes=rose,+jasmine&n=3 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jan/2026 11:45:39] "GET /recommend?notes=rose,+jasmine,+vanilla&n=3 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jan/2026 11:55:54] "GET /recommend?notes=citrus&n=3 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jan/2026 11:56:02] "GET /recommend?notes=citrus,+jasmine&n=3 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jan/2026 11:59:07] "GET /recommend?notes=amber&n=3 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jan/2026 12:00:02] "GET /recommend?notes=citrus,+amber&n=3 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jan/2026 12:01:56] "GET /recommend?notes=vanilla,+citrus&n=3 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jan/2026 12:24:46] "GET /recommend?notes=vanilla,+citrus,+sandalwood&n=3 HTTP/1.1" 200 -
+127.0.0.1 - - [13/Jan/2026 09:54:02] "GET /recommend?notes=vanilla,+musk&n=3 HTTP/1.1" 200 -
+127.0.0.1 - - [13/Jan/2026 19:23:56] "GET /recommend?notes=vanilla,+musk&n=3 HTTP/1.1" 200 -
+127.0.0.1 - - [13/Jan/2026 19:24:18] "GET /recommend?notes=lavender,+rose&n=3 HTTP/1.1" 200 -
+127.0.0.1 - - [13/Jan/2026 19:50:02] "GET /recommend?notes=musk,+vanilla&n=3 HTTP/1.1" 200 -

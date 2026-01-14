@@ -19,7 +19,12 @@ app.use(cors());
 app.use("/api/auth", authRoutes);
 app.use("/api/frag", fragRoutes);
 
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI, {
+    ssl: true,
+    tls: true,
+    tlsAllowInvalidCertificates: true,
+    serverSelectionTimeoutMS: 5000,
+})
 .then(() => {
     console.log("Connected to MongoDB");
 })

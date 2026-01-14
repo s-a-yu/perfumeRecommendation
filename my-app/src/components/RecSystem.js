@@ -1,18 +1,19 @@
 import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 import React, { useState } from 'react';
-import Select from 'react-select';
 import axios from 'axios';
 
-// Define the list of available notes for selection
+// Define the list of available notes for selection with colors
 const notesOptions = [
-    { value: 'vanilla', label: 'Vanilla' },
-    { value: 'musk', label: 'Musk' },
-    { value: 'lavender', label: 'Lavender' },
-    { value: 'rose', label: 'Rose' },
-    { value: 'citrus', label: 'Citrus' },
-    { value: 'amber', label: 'Amber' },
-    { value: 'sandalwood', label: 'Sandalwood' },
-    { value: 'jasmine', label: 'Jasmine' }
+    { value: 'vanilla', label: 'Vanilla', emoji: '🌸', color: '#f9e4d4' },
+    { value: 'musk', label: 'Musk', emoji: '🦌', color: '#d4b5a0' },
+    { value: 'lavender', label: 'Lavender', emoji: '💜', color: '#d4c5f9' },
+    { value: 'rose', label: 'Rose', emoji: '🌹', color: '#ffd4e5' },
+    { value: 'citrus', label: 'Citrus', emoji: '🍊', color: '#ffe4b3' },
+    { value: 'amber', label: 'Amber', emoji: '🍯', color: '#f4d6a0' },
+    { value: 'sandalwood', label: 'Sandalwood', emoji: '🌲', color: '#d4e5d4' },
+    { value: 'jasmine', label: 'Jasmine', emoji: '🌼', color: '#fff4d4' }
 ];
 
 
@@ -38,7 +39,6 @@ const saveFragranceToUser = async (username, data) => {
     }
 };
 
-// Handle click event to save fragrance to user
 const handleSaveFragrance = (fragrance) => {
     console.log("handling save fragrance", fragrance);
     const username = localStorage.getItem('username');
@@ -49,86 +49,310 @@ const handleSaveFragrance = (fragrance) => {
         alert("In order to save a fragrance, you must be logged in.");
       console.error('User ID not found in local storage');
     }
-  };
+};
 
 function RecSystem() {
     const [selectedNotes, setSelectedNotes] = useState([]);
     const [recommendations, setRecommendations] = useState([]);
+    const [loading, setLoading] = useState(false);
 
-    // Handle API call when the user submits their selected notes
+    const toggleNote = (note) => {
+        setSelectedNotes(prev => {
+            const isSelected = prev.some(n => n.value === note.value);
+            if (isSelected) {
+                return prev.filter(n => n.value !== note.value);
+            } else {
+                return [...prev, note];
+            }
+        });
+    };
+
+    const isNoteSelected = (noteValue) => {
+        return selectedNotes.some(n => n.value === noteValue);
+    };
+
     const getRecommendations = () => {
-        const apiUrl = 'http://127.0.0.1:5000/recommend'; // Flask API endpoint
+        if (selectedNotes.length === 0) {
+            alert('Please select at least one scent note');
+            return;
+        }
 
-        // Convert selected notes into a comma-separated string
+        setLoading(true);
+        const apiUrl = 'http://127.0.0.1:5000/recommend';
         const notesString = selectedNotes.map(note => note.value).join(', ');
 
         axios.get(apiUrl, {
             params: {
-                notes: notesString, // Pass selected notes
-                n: 3                // Number of recommendations
+                notes: notesString,
+                n: 3
             }
         })
         .then(response => {
-            setRecommendations(response.data); // Update state with API response
-            // Save recommendations to the Fragrance collection
+            setRecommendations(response.data);
+            setLoading(false);
         })
         .catch(error => {
             console.error('Error fetching recommendations:', error);
+            alert('Unable to fetch recommendations. Please make sure the recommendation service is running.');
+            setLoading(false);
         });
     };
 
     return (
-        <div style={{ padding: '70px', maxWidth: '900px', margin: '0 auto' }}>
-            <h1>Scent Recommendation Quiz</h1>
-            <p>Select the notes you like to get personalized perfume recommendations:</p>
+        <section style={{
+            minHeight: '100vh',
+            background: 'linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%)',
+            padding: '100px 20px 60px',
+            display: 'flex',
+            alignItems: 'center'
+        }}>
+            <Container fluid style={{ maxWidth: '1400px' }}>
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '80px',
+                    flexWrap: 'wrap'
+                }}>
+                    {/* Left Side - Title and Description */}
+                    <div style={{ flex: '1', minWidth: '350px' }}>
+                        <h1 style={{
+                            fontSize: '72px',
+                            fontWeight: '400',
+                            color: '#1a1a1a',
+                            marginBottom: '40px',
+                            letterSpacing: '-2px',
+                            lineHeight: '1.1',
+                            fontFamily: "'Bitter', serif"
+                        }}>
+                            Discover Your<br />Signature Scent
+                        </h1>
+                        <p style={{
+                            fontSize: '18px',
+                            color: '#4a4a4a',
+                            lineHeight: '1.7',
+                            margin: 0
+                        }}>
+                            Select your favorite fragrance notes and let AI find the perfect perfume match from our collection of 65,000+ fragrances
+                        </p>
+                    </div>
 
-            {/* Multi-Select Dropdown */}
-            <Select
-                options={notesOptions}
-                isMulti
-                onChange={(selected) => setSelectedNotes(selected)}
-                placeholder="Select your favorite notes..."
-            />
-
-            {/* Submit Button */}
-            <button
-                onClick={getRecommendations}
-                style={{
-                    marginTop: '20px',
-                    padding: '10px 20px',
-                    backgroundColor: '#007BFF',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer'
-                }}
-            >
-                Get Recommendations
-            </button>
-
-            {/* Display Recommendations */}
-            {recommendations.length > 0 && (
-                <div style={{ marginTop: '30px' }}>
-                    <h2>Recommendations:</h2>
-                    {recommendations.map((rec, index) => (
-                        <div key={index} onClick={() => handleSaveFragrance(rec)} style={{ marginBottom: '15px' }}>
-                            <h3>{rec.Name}</h3>
-                            <p><strong>Brand:</strong> {rec.Brand}</p>
-                            <p><strong>Notes:</strong> {rec.Notes}</p>
+                    {/* Right Side - Notes Grid and Button */}
+                    <div style={{ flex: '1', minWidth: '500px' }}>
+                        {/* Notes Grid */}
+                        <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(4, 1fr)',
+                            gap: '16px',
+                            marginBottom: '32px'
+                        }}>
+                            {notesOptions.map((note) => {
+                                const selected = isNoteSelected(note.value);
+                                return (
+                                    <div
+                                        key={note.value}
+                                        onClick={() => toggleNote(note)}
+                                        style={{
+                                            backgroundColor: note.color,
+                                            padding: '40px 20px',
+                                            borderRadius: '24px',
+                                            textAlign: 'center',
+                                            cursor: 'pointer',
+                                            border: selected ? '3px solid #3d4f5c' : '3px solid transparent',
+                                            transition: 'all 0.3s ease',
+                                            boxShadow: selected ? '0 4px 16px rgba(61, 79, 92, 0.3)' : 'none',
+                                            transform: selected ? 'scale(1.05)' : 'scale(1)',
+                                            userSelect: 'none',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            minHeight: '120px',
+                                            aspectRatio: '1'
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            if (!selected) {
+                                                e.currentTarget.style.transform = 'scale(1.02)';
+                                                e.currentTarget.style.boxShadow = '0 6px 16px rgba(0,0,0,0.08)';
+                                            }
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            if (!selected) {
+                                                e.currentTarget.style.transform = 'scale(1)';
+                                                e.currentTarget.style.boxShadow = 'none';
+                                            }
+                                        }}
+                                    >
+                                        <div style={{
+                                            fontSize: '32px',
+                                            marginBottom: '8px'
+                                        }}>
+                                            {note.emoji}
+                                        </div>
+                                        <div style={{
+                                            fontSize: '14px',
+                                            fontWeight: '500',
+                                            color: '#2c3e50'
+                                        }}>
+                                            {note.label}
+                                        </div>
+                                    </div>
+                                );
+                            })}
                         </div>
-                    ))}
+
+                        {/* Get Recommendations Button */}
+                        <Button
+                            onClick={getRecommendations}
+                            disabled={loading || selectedNotes.length === 0}
+                            style={{
+                                width: '100%',
+                                padding: '20px 80px',
+                                fontSize: '16px',
+                                fontWeight: '500',
+                                backgroundColor: selectedNotes.length === 0 ? '#95a5a6' : '#3d4f5c',
+                                border: 'none',
+                                borderRadius: '50px',
+                                transition: 'all 0.3s ease',
+                                transform: loading ? 'scale(0.98)' : 'scale(1)',
+                                boxShadow: selectedNotes.length > 0 ? '0 4px 20px rgba(61, 79, 92, 0.3)' : 'none',
+                                color: 'white'
+                            }}
+                            onMouseEnter={(e) => {
+                                if (selectedNotes.length > 0 && !loading) {
+                                    e.target.style.backgroundColor = '#2c3d47';
+                                    e.target.style.transform = 'translateY(-2px)';
+                                    e.target.style.boxShadow = '0 6px 24px rgba(61, 79, 92, 0.4)';
+                                }
+                            }}
+                            onMouseLeave={(e) => {
+                                if (selectedNotes.length > 0) {
+                                    e.target.style.backgroundColor = '#3d4f5c';
+                                    e.target.style.transform = 'translateY(0)';
+                                    e.target.style.boxShadow = '0 4px 20px rgba(61, 79, 92, 0.3)';
+                                }
+                            }}
+                        >
+                            {loading ? 'Finding Perfect Matches...' : 'Get Recommendations'}
+                        </Button>
+                    </div>
                 </div>
-            )}
-            {/* Bottom Separator */}
-            <hr
-                style={{
-                marginTop: '90px',
-                border: '1px solid #ddd',
-                width: '100vw',
-                marginLeft: 'calc(-50vw + 50%)',
-                }}
-            />
-        </div>
+
+                {/* Recommendations */}
+                {recommendations.length > 0 && (
+                    <div style={{ marginTop: '120px', maxWidth: '900px', margin: '120px auto 0' }}>
+                        <h2 style={{
+                            fontSize: '28px',
+                            fontWeight: '700',
+                            color: '#2c3e50',
+                            marginBottom: '30px',
+                            textAlign: 'center'
+                        }}>
+                            Your Perfect Matches
+                        </h2>
+
+                        {recommendations.map((rec, index) => (
+                            <Card
+                                key={index}
+                                onClick={() => handleSaveFragrance(rec)}
+                                style={{
+                                    border: 'none',
+                                    borderRadius: '16px',
+                                    marginBottom: '20px',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.3s ease',
+                                    boxShadow: '0 4px 12px rgba(0,0,0,0.06)',
+                                    overflow: 'hidden'
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(-4px)';
+                                    e.currentTarget.style.boxShadow = '0 12px 24px rgba(0,0,0,0.12)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(0)';
+                                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.06)';
+                                }}
+                            >
+                                <Card.Body style={{ padding: '30px' }}>
+                                    <div style={{
+                                        display: 'flex',
+                                        alignItems: 'flex-start',
+                                        justifyContent: 'space-between',
+                                        marginBottom: '12px'
+                                    }}>
+                                        <div style={{ flex: 1 }}>
+                                            <h3 style={{
+                                                fontSize: '22px',
+                                                fontWeight: '600',
+                                                color: '#2c3e50',
+                                                margin: 0,
+                                                marginBottom: '8px'
+                                            }}>
+                                                {rec.Name}
+                                            </h3>
+                                            <p style={{
+                                                fontSize: '16px',
+                                                color: '#7f8c8d',
+                                                margin: 0,
+                                                fontWeight: '500'
+                                            }}>
+                                                {rec.Brand}
+                                            </p>
+                                        </div>
+                                        <div style={{
+                                            backgroundColor: '#ecf0f1',
+                                            padding: '8px 16px',
+                                            borderRadius: '20px',
+                                            fontSize: '14px',
+                                            color: '#2c3e50',
+                                            fontWeight: '600'
+                                        }}>
+                                            #{index + 1}
+                                        </div>
+                                    </div>
+
+                                    <div style={{
+                                        marginTop: '16px',
+                                        padding: '16px',
+                                        backgroundColor: '#f8f9fa',
+                                        borderRadius: '12px'
+                                    }}>
+                                        <p style={{
+                                            fontSize: '13px',
+                                            color: '#95a5a6',
+                                            margin: 0,
+                                            marginBottom: '6px',
+                                            textTransform: 'uppercase',
+                                            letterSpacing: '0.5px',
+                                            fontWeight: '600'
+                                        }}>
+                                            Fragrance Notes
+                                        </p>
+                                        <p style={{
+                                            fontSize: '15px',
+                                            color: '#2c3e50',
+                                            margin: 0,
+                                            lineHeight: '1.6'
+                                        }}>
+                                            {rec.Notes}
+                                        </p>
+                                    </div>
+
+                                    <div style={{
+                                        marginTop: '16px',
+                                        fontSize: '14px',
+                                        color: '#95a5a6',
+                                        textAlign: 'center',
+                                        fontStyle: 'italic'
+                                    }}>
+                                        Click to save to your favorites
+                                    </div>
+                                </Card.Body>
+                            </Card>
+                        ))}
+                    </div>
+                )}
+            </Container>
+        </section>
     );
 }
 

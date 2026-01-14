@@ -11,25 +11,27 @@ function AppHeader() {
   console.log("auth", auth);
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar
+      expand="lg"
+      style={{
+        background: 'linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%)',
+        borderBottom: 'none',
+        boxShadow: 'none'
+      }}
+    >
       <Container>
         <Navbar.Brand href="#home">Aura.</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#about">About</Nav.Link>
-            <Nav.Link href="#services">Services</Nav.Link>
-            <Nav.Link href="#explore">Explore</Nav.Link>
-            <Nav.Link href="#scent-quiz">Quiz</Nav.Link>
-            <Nav.Link href="#teams">Team</Nav.Link>
-            <Nav.Link href="#testimonials">Testimonials</Nav.Link>
+            <Nav.Link as={Link} to="/">Home</Nav.Link>
             {user ? (
-              <><Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
-              <button onClick={() => auth.logOut()} className="btn-submit">
-                Logout
-              </button></>
-
+              <>
+                <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+                <button onClick={() => auth.logOut()} className="btn-submit">
+                  Logout
+                </button>
+              </>
             ) : (
               <Nav.Link as={Link} to="/login">Login/Register</Nav.Link>
             )}
